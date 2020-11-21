@@ -16,6 +16,7 @@ PINK = (230, 50, 230)
 
 circles = 0
 c = []
+coords = (-100, -100)
 
 # здесь происходит инициация,
 # создание объектов
@@ -39,7 +40,10 @@ while True:
     for i in pygame.event.get():
         if i.type == pygame.QUIT:
             sys.exit()
-        print(i)
+        elif i.type == pygame.MOUSEBUTTONDOWN:
+            coords = i.pos
+            print(i.pos)
+        #print(i)
 
     # --------
     # изменение объектов
@@ -49,10 +53,13 @@ while True:
     sc.fill(WHITE)
     while circles < 5:
         x = random.randint(0, 600)
-        y = 100
-        r = 50
+        y = random.randint(0, 400)
+        r = random.randint(10, 50)
         circles += 1
         c.append((x,y,r))
+    for elem in c:
+        if (coords[0]-elem[0])**2 + (coords[1]-elem[1])**2 <= elem[2]*elem[2]:
+            c.remove(elem)
     for elem in c:
         pygame.draw.circle(sc, YELLOW, (elem[0], elem[1]), elem[2])
     pygame.display.update()
