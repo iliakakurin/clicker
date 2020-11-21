@@ -17,6 +17,8 @@ PINK = (230, 50, 230)
 circles = 0
 c = []
 coords = (-100, -100)
+counter = 0
+score = 0
 
 # здесь происходит инициация,
 # создание объектов
@@ -34,6 +36,9 @@ while True:
 
     # задержка
     clock.tick(FPS)
+    counter += 1
+
+
 
 
     # цикл обработки событий
@@ -56,12 +61,19 @@ while True:
         y = random.randint(0, 400)
         r = random.randint(10, 50)
         circles += 1
-        c.append((x,y,r))
+        c.append((x, y, r))
     for elem in c:
         if (coords[0]-elem[0])**2 + (coords[1]-elem[1])**2 <= elem[2]*elem[2]:
             c.remove(elem)
+            circles -= 1
+            score += 1
     for elem in c:
         pygame.draw.circle(sc, YELLOW, (elem[0], elem[1]), elem[2])
+
+    if counter == 30 * FPS:
+        print(score)
+        break
+        
     pygame.display.update()
 
 # залить экран белым
