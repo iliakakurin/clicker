@@ -1,6 +1,7 @@
 # здесь подключаются модули
 import pygame
 import sys
+import random
 
 # здесь определяются константы,
 # классы и функции
@@ -12,6 +13,9 @@ LIGHT_BLUE = (64, 128, 255)
 GREEN = (0, 200, 64)
 YELLOW = (225, 225, 0)
 PINK = (230, 50, 230)
+
+circles = 0
+c = []
 
 # здесь происходит инициация,
 # создание объектов
@@ -43,7 +47,14 @@ while True:
 
     # обновление экрана
     sc.fill(WHITE)
-    pygame.draw.circle(sc, YELLOW, (550, 350), 50)
+    while circles < 5:
+        x = random.randint(0, 600)
+        y = 100
+        r = 50
+        circles += 1
+        c.append((x,y,r))
+    for elem in c:
+        pygame.draw.circle(sc, YELLOW, (elem[0], elem[1]), elem[2])
     pygame.display.update()
 
 # залить экран белым
